@@ -5,15 +5,11 @@ var session = new Session();
 
 const app = express.Router();
 
-//displays users data and number of users
+//displays number of users
 app.get("/", function(req, res){
-    res.send({...session, UserNumber: session.getUserNumber()});
+    res.send({UserNumber: session.getUserNumber()});
 })
 
-//display exercise based on id #
-app.get("/exercise/:id", function(req, res){
-    res.send(session.users[req.params.id].exercise);
-})
 
 //create user w/ name
 app.post('/users', (req, res) => {
@@ -22,12 +18,38 @@ app.post('/users', (req, res) => {
     res.send(user);
 })
 
+//display user info based on id
+app.get('/users/:id', (req, res) => {
+    res.send("{Name: " + session.users[req.params.id].name + "}, {Exercise: " + session.users[req.params.id].exercise + "}, {Diet: " + session.users[req.params.id].diet + "}");
+})
+
+//displays users data 
+app.get("/totalusers", function(req, res){
+    res.send({Users: session.users});
+})
+
 //add exercise based on id #
-//exercise keeps being input as null!!!!
 app.post('/exercise', (req, res) => {
     var playerId = req.header("playerId");
-    session.addExercise(req.body.worked, playerId);
+    session.addExercise(req.body.work, playerId);
     res.send("exercise added");
+})
+
+//display only exercise based on id #
+app.get("/exercise/:id", function(req, res){
+    res.send(session.users[req.params.id].exercise);
+})
+
+//add diet based on id #
+app.post('/diet', (req, res) => {
+    var playerId = req.header("playerId");
+    session.addFood(req.body.food, playerId);
+    res.send("diet added");
+})
+
+//display only diet based on id #
+app.get("/diet/:id", function(req, res){
+    res.send(session.users[req.params.id].diet);
 })
 
 module.exports = app;

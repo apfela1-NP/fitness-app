@@ -1,6 +1,3 @@
-const exercise = require('./exercise');
-const diet = require('./diet')
-
 
 class Session{
     constructor(){
