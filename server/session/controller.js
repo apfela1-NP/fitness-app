@@ -23,7 +23,7 @@ app.get('/users/:id', (req, res) => {
     res.send("{Name: " + session.users[req.params.id].name + "}, {Exercise: " + session.users[req.params.id].exercise + "}, {Diet: " + session.users[req.params.id].diet + "}");
 })
 
-//displays users data 
+//displays all users data 
 app.get("/totalusers", function(req, res){
     res.send({Users: session.users});
 })
@@ -50,6 +50,12 @@ app.post('/diet', (req, res) => {
 //display only diet based on id #
 app.get("/diet/:id", function(req, res){
     res.send(session.users[req.params.id].diet);
+})
+
+app.post('/sharedwith', (req, res) => {
+    var playerId = req.header("playerId");
+    session.addAccess(playerId, req.body.id);
+    res.send(session.users[req.body.id].name + " can now view your exercise and diet");
 })
 
 module.exports = app;

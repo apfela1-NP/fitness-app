@@ -16,6 +16,14 @@ class Session{
         return this.users.length;
     }
 
+    addAccess(id, allowedId){
+        this.users[id].sharedWith.push(allowedId);
+    }
+
+   /* checkAccess(id, requestedId){
+
+    }*/
+
 }
 
 class User{
@@ -23,6 +31,8 @@ class User{
 
         this.id = id;
         this.name = name;
+        //this.weight = weight;
+        this.sharedWith = [];
         this.exercise = [];
         this.diet = [];
     }
