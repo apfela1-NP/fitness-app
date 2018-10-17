@@ -1,0 +1,18 @@
+{
+  "name": "fitness-app",
+  "version": "1.0.0",
+  "description": "Create an account (sign up screen → home screen)\r  - When the user first creates an account he/she must enter his/her email, create a password, and enter weight and height.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.4"
+  }
+}
