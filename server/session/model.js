@@ -12,27 +12,29 @@ class Session{
         this.users[id].exercise.push(work);
     }
 
+    addWeight(weight, id){
+        this.users[id].pastweight.push(weight);
+        this.users[id].weight = weight;
+    }
+
     getUserNumber(){
         return this.users.length;
     }
 
     addAccess(id, allowedId){
-        this.users[id].sharedWith.push(allowedId);
+        this.users[id].sharedwith.push(allowedId);
     }
-
-   /* checkAccess(id, requestedId){
-
-    }*/
 
 }
 
 class User{
-    constructor(name, id) {
+    constructor(name, id, weight) {
 
         this.id = id;
         this.name = name;
-        //this.weight = weight;
-        this.sharedWith = [];
+        this.weight = weight;
+        this.pastweight = [];
+        this.sharedwith = [String(id)];
         this.exercise = [];
         this.diet = [];
     }
