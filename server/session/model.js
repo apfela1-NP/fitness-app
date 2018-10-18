@@ -55,6 +55,21 @@ class User{
     }
 }
 
+class Workout {
+    constructor(work, duration, date){
+        this.work = work;
+        this.duration = duration;
+        this.date = date;
+    }
+}
+
+class Meal {
+    constructor(food, date){
+        this.food = food;
+        this.date = date;
+    }
+}
+
 module.exports = {
-    User, Session
+    User, Session, Workout, Meal
 }

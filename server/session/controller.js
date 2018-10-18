@@ -1,5 +1,5 @@
 const express = require('express');
-const { Session, User} = require('./model');
+const { Session, User, Workout, Meal} = require('./model');
 
 var session = new Session();
 
@@ -23,9 +23,19 @@ app.post('/users', (req, res) => {
 app.get('/users/:id', (req, res) => {
     var playerId = req.header("playerId");
     if(session.users[req.params.id].sharedwith.includes(String(playerId))){
-        res.send(session.users[req.params.id].name + " has completed the following exercises: " + session.users[req.params.id].exercise + 
-        "\n" + session.users[req.params.id].name + " has eaten the following meals: " + session.users[req.params.id].diet + 
-        "\n" + session.users[req.params.id].name + " has previously weighed: " + session.users[req.params.id].pastweight +
+        var exerciseString = " has completed the following exercises: ";
+        var i;
+        //string creation for exercise
+        for(i = 0; i < session.users[req.params.id].exercise.length; i++){
+            exerciseString += ("On " + session.users[req.params.id].exercise[i].date + " " + session.users[req.params.id].name + " did " + session.users[req.params.id].exercise[i].work + " for " + session.users[req.params.id].exercise[i].duration + ". \n");
+        }
+        var dietString = " has eaten the following meals: ";
+        //string creation for diet
+        for(i = 0; i < session.users[req.params.id].diet.length; i++){
+            dietString += ("On " + session.users[req.params.id].diet[i].date + session.users[req.params.id].name +" ate " + session.users[req.params.id].diet[i].food + ". \n");
+        }
+        res.send(session.users[req.params.id].name +  exerciseString + session.users[req.params.id].name + dietString + 
+        session.users[req.params.id].name + " has previously weighed: " + session.users[req.params.id].pastweight +
         "\n" + session.users[req.params.id].name + " currently weighs " + session.users[req.params.id].weight + ", has a height of " + session.users[req.params.id].height + " inches, and a bmi of " + session.users[req.params.id].bmi);
     }
     else{
@@ -48,7 +58,9 @@ app.get("/totalusers", function(req, res){
 //add exercise based on id #
 app.post('/exercise', (req, res) => {
     var playerId = req.header("playerId");
-    session.addExercise(req.body.work, playerId);
+    const date = new Date();
+    const workout = new Workout(req.body.work, req.body.duration, date)
+    session.addExercise(workout, playerId);
     res.send("exercise added");
 })
 
@@ -57,7 +69,13 @@ app.post('/exercise', (req, res) => {
 app.get("/users/:id/exercise", function(req, res){
     var playerId = req.header("playerId");
     if((session.users[req.params.id].id == playerId) || (playerId == -1)){
-        res.send("You have completed the following exercises: " + session.users[req.params.id].exercise);    
+        var string = "";
+        var i;
+        //string creation for user exercise (work, duration, date)
+        for(i = 0; i < session.users[req.params.id].exercise.length; i++){
+            string += ("On " + session.users[req.params.id].exercise[i].date + " you did " + session.users[req.params.id].exercise[i].work + " for " + session.users[req.params.id].exercise[i].duration + ". \n");
+        }
+        res.send(string);
     }
     else{
         res.send("Only the user can view their individual data");
@@ -67,7 +85,9 @@ app.get("/users/:id/exercise", function(req, res){
 //add diet based on id #
 app.post('/diet', (req, res) => {
     var playerId = req.header("playerId");
-    session.addFood(req.body.food, playerId);
+    const date = new Date();
+    const meal = new Meal(req.body.food, date)
+    session.addFood(meal, playerId);
     res.send("diet added");
 })
 
@@ -76,7 +96,13 @@ app.post('/diet', (req, res) => {
 app.get("/users/:id/diet", function(req, res){
     var playerId = req.header("playerId");
     if((session.users[req.params.id].id == playerId) || (playerId == -1)){
-        res.send("You have eaten the following meals: " + session.users[req.params.id].diet);    
+        var string = "";
+        var i;
+        //string creation for user diet (food, date)
+        for(i = 0; i < session.users[req.params.id].diet.length; i++){
+            string += ("On " + session.users[req.params.id].diet[i].date + " you ate " + session.users[req.params.id].diet[i].food + ". \n");
+        }
+        res.send(string);
     }
     else{
         res.send("Only the user can view their individual data");
