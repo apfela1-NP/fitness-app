@@ -29,11 +29,13 @@ app.get('/users/:id', (req, res) => {
         for(i = 0; i < session.users[req.params.id].exercise.length; i++){
             exerciseString += ("On " + session.users[req.params.id].exercise[i].date + " " + session.users[req.params.id].name + " did " + session.users[req.params.id].exercise[i].work + " for " + session.users[req.params.id].exercise[i].duration + ". \n");
         }
+
         var dietString = " has eaten the following meals: ";
         //string creation for diet
         for(i = 0; i < session.users[req.params.id].diet.length; i++){
-            dietString += ("On " + session.users[req.params.id].diet[i].date + session.users[req.params.id].name +" ate " + session.users[req.params.id].diet[i].food + ". \n");
+            dietString += ("On " + session.users[req.params.id].diet[i].date + " " +session.users[req.params.id].name +" ate " + session.users[req.params.id].diet[i].food + ". \n");
         }
+       
         res.send(session.users[req.params.id].name +  exerciseString + session.users[req.params.id].name + dietString + 
         session.users[req.params.id].name + " has previously weighed: " + session.users[req.params.id].pastweight +
         "\n" + session.users[req.params.id].name + " currently weighs " + session.users[req.params.id].weight + ", has a height of " + session.users[req.params.id].height + " inches, and a bmi of " + session.users[req.params.id].bmi);

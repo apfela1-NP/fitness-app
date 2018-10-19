@@ -14,7 +14,7 @@ class Session{
         this.users[id].exercise.push(work);
     }
 
-    //adds weight to past weight array, assigns weight to the users current weight, updates the bmi
+    //adds weight to past weight array, assigns weight to the users weight, updates the bmi
     addWeight(weight, id){
         this.users[id].pastweight.push(this.users[id].weight);
         this.users[id].weight = weight;
