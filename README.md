@@ -13,3 +13,32 @@ have a description of workouts to reference when needed, track what body part wa
 
 Track diet (home screen → diet tracking screen)
  - The user can input exactly what they're eating into a note so he/she can reference it in the future. (diet tracking screen → diet input screen) The user can tag this with certain nutritional tags (e.g. protein, carbs, etc.) or more specifically by food groups (e.g. fruit, vegetables, meat, etc.). The purpose of the diet tracking is not meant to track every calorie but to enable the user to have a general idea what he/she is eating on a consistent basis. (diet tracking screen → diet stats screen) Calorie counting and tracking exact nutritional information is not necessary for most people. 
+
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
