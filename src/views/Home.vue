@@ -6,7 +6,7 @@
         <p class="lead">
           Follow your progress and stay on track using the simplest and most effective fitness app around. Our services include diet tracking, exercise tracking, and more to make sure you reach your goals!
         </p>
-        <a class="btn btn-primary" href="#" role="button">Login</a></br>
+        <a class="btn btn-primary" href="#" role="button">Login</a>
         <a class="btn btn-primary" href="#" role="button">Sign up</a>
     </div>
   </div>
