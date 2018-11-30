@@ -1,5 +1,5 @@
 const api_root = "http://localhost:80/";
-export let playerId = 0; //this will cause an error later so !pay attention AMber!
+export let playerId = null;
 
 
 
@@ -9,6 +9,11 @@ export function GetState(){
 
 export function GetProfile(){
     return myFetch(api_root + `/users/${playerId}`);
+}
+
+export function Login(name){
+    return myFetch(api_root + `/users`, { name: name })
+            .then(x=> playerId = x.id);
 }
 
 
