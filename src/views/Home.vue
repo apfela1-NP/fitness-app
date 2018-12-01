@@ -11,7 +11,7 @@
             <div class="card" >
                     <h5 class="card-header">
                         Users
-                        <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: playerId() !== null}">+</a>
+                        <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: playerId !== null}">+</a>
                     </h5>
                     <ul class="list-group list-group-flush">
                         <li v-for="u in state.users" :key="u.id"
@@ -74,9 +74,9 @@
 </style>
 
 <script>
-import { GetState, Login, playerId } from '@/services/api_access';
+import * as api from '@/services/api_access';
 export default {
-    data: function(){
+    data(){
         return {
             state: {
                 users: []
@@ -86,19 +86,23 @@ export default {
             myWeight: "",
             myBMI: 0,
 
-            //playerId: null
         }
+    },
+    created(){
+        this.refresh();
     },
     methods: {
         refresh(){
-            GetState()
+            api.GetState()
             .then(x=> this.state = x)
         },
-        login: function() {
-            Login(prompt('What is your name?'), prompt('What is your weight?'), prompt('What is your height?'))
+        login() {
+            api.Login(prompt('What is your name?'), prompt('What is your weight?'), prompt('What is your height?'))
             .then(()=> this.refresh())
         },
-        playerId: ()=> playerId
+    },
+    computed: {
+        playerId: ()=> api.playerId
     }
 }
 </script>
