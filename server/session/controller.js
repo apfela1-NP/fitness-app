@@ -7,7 +7,7 @@ const app = express.Router();
 
 //displays number of users
 app.get("/", function(req, res){
-    res.send({UserNumber: session.getUserNumber()});
+    res.send({...session});
 })
 
 

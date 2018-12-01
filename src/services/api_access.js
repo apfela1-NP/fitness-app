@@ -1,4 +1,4 @@
-const api_root = "http://localhost:80/";
+const api_root = "http://localhost:80/session";
 export let playerId = null;
 
 
@@ -11,8 +11,8 @@ export function GetProfile(){
     return myFetch(api_root + `/users/${playerId}`);
 }
 
-export function Login(name){
-    return myFetch(api_root + `/users`, { name: name })
+export function Login(name, weight, height){
+    return myFetch(api_root + `/users`, { name: name, weight: weight, height: height })
             .then(x=> playerId = x.id);
 }
 

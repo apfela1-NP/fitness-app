@@ -6,7 +6,25 @@
         <p class="lead">
           Follow your progress and stay on track using the simplest and most effective fitness app around. Our services include diet tracking, exercise tracking, and more to make sure you reach your goals!
         </p>
-        <a class="btn btn-primary" href="#" role="button">Login</a>
+       <div class="row">
+        <div class="col-md-4">
+            <div class="card" >
+                    <h5 class="card-header">
+                        Users
+                        <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: playerId() !== null}">+</a>
+                    </h5>
+                    <ul class="list-group list-group-flush">
+                        <li v-for="u in state.users" :key="u.id"
+                            class="list-group-item">
+                            <img />
+                            <h5>{{u.name}}</h5>
+                            <span class="badge badge-primary badge-pill">{{u.bmi}}</span>
+                        </li>
+ 
+                    </ul>
+            </div>
+        </div>
+    </div>
     </div>
   </div>
   <div class="container">
@@ -39,3 +57,48 @@
 </div>
 </template>
 
+
+<style lang="scss">
+    li.list-group-item {
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+        img {
+            width: 30px; height: 30px;
+            margin-right: 5px;
+        }
+        h5 {
+            flex-grow: 1;
+        }
+    }
+</style>
+
+<script>
+import { GetState, Login, playerId } from '@/services/api_access';
+export default {
+    data: function(){
+        return {
+            state: {
+                users: []
+            },
+            myWeights: [],
+            myHeight: "",
+            myWeight: "",
+            myBMI: 0,
+
+            //playerId: null
+        }
+    },
+    methods: {
+        refresh(){
+            GetState()
+            .then(x=> this.state = x)
+        },
+        login: function() {
+            Login(prompt('What is your name?'), prompt('What is your weight?'), prompt('What is your height?'))
+            .then(()=> this.refresh())
+        },
+        playerId: ()=> playerId
+    }
+}
+</script>
