@@ -1,5 +1,5 @@
 const express = require('express');
-const { Session, User, Workout, Meal} = require('./model');
+const { Session, Workout, Meal} = require('./model');
 
 var session = new Session();
 
@@ -13,8 +13,7 @@ app.get("/", function(req, res){
 
 //create user w/ name
 app.post('/users', (req, res) => {
-    const user = new User(req.body.name, session.users.length, req.body.weight, req.body.height);
-    session.users.push(user);
+    const user = session.login(req.body.name, req.body.fbid, req.body.access_token);
     res.send(user);
 })
 

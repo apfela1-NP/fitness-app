@@ -1,19 +1,25 @@
+import Vue from "vue";
+
 const api_root = "http://localhost:80/session";
 export let playerId = null;
-
+export const events = new Vue();
 
 
 export function GetState(){
     return myFetch(api_root + "/");
 }
 
-export function GetProfile(){
+export function GetMyProfile(){
     return myFetch(api_root + `/users/${playerId}`);
 }
 
-export function Login(name, weight, height){
-    return myFetch(api_root + `/users`, { name: name, weight: weight, height: height })
-            .then(x=> playerId = x.id);
+export function Login(name, fbid, access_token){
+    return myFetch(api_root + `/users`, { name, fbid, access_token })
+            .then(x=> {
+                playerId = x.id;
+                events.$emit('playerId', playerId);
+                
+            });
 }
 
 

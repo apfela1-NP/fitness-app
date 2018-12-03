@@ -6,25 +6,9 @@
         <p class="lead">
           Follow your progress and stay on track using the simplest and most effective fitness app around. Our services include diet tracking, exercise tracking, and more to make sure you reach your goals!
         </p>
-       <div class="row">
-        <div class="col-md-4">
-            <div class="card" >
-                    <h5 class="card-header">
-                        Users
-                        <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: playerId !== null}">+</a>
-                    </h5>
-                    <ul class="list-group list-group-flush">
-                        <li v-for="u in state.users" :key="u.id"
-                            class="list-group-item">
-                            <img />
-                            <h5>{{u.name}}</h5>
-                            <span class="badge badge-primary badge-pill">{{u.bmi}}</span>
-                        </li>
- 
-                    </ul>
-            </div>
-        </div>
-    </div>
+            <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: playerId !== null}">Login</a>
+            <p><i v-if="playerId !== null && state.users[playerId]">(Welcome {{state.users[playerId].name}})</i></P>
+              
     </div>
   </div>
   <div class="container">
@@ -75,21 +59,24 @@
 
 <script>
 import * as api from '@/services/api_access';
+import * as fb from '@/services/facebook';
+// eslint-disable-next-line
+let loopTimer = null;
+
 export default {
     data(){
         return {
+            playerId: null,
             state: {
-                users: []
+                users: [],
             },
-            myWeights: [],
-            myHeight: "",
-            myWeight: "",
-            myBMI: 0,
 
         }
     },
-    created(){
-        this.refresh();
+    created() {
+        api.events.$on("playerId", x=> this.playerId = x);
+        loopTimer = setInterval(this.refresh, 1000);
+        
     },
     methods: {
         refresh(){
@@ -97,12 +84,10 @@ export default {
             .then(x=> this.state = x)
         },
         login() {
-            api.Login(prompt('What is your name?'), prompt('What is your weight?'), prompt('What is your height?'))
-            .then(()=> this.refresh())
+            fb.FBLogin();
+            //.then(()=> this.refresh())
         },
-    },
-    computed: {
-        playerId: ()=> api.playerId
+
     }
 }
 </script>
