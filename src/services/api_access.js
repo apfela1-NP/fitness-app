@@ -9,9 +9,6 @@ export function GetState(){
     return myFetch(api_root + "/");
 }
 
-export function GetMyProfile(){
-    return myFetch(api_root + `/users/${playerId}`);
-}
 
 export function Login(name, fbid, access_token){
     return myFetch(api_root + `/users`, { name, fbid, access_token })
@@ -20,6 +17,18 @@ export function Login(name, fbid, access_token){
                 events.$emit('playerId', playerId);
                 
             });
+}
+
+export function enterMeal(food){
+    return myFetch(api_root + `/diet`, {food})
+}
+
+export function enterExercise(exercise, duration){
+    return myFetch(api_root + `/exercise`, {exercise, duration})
+}
+
+export function GetMyProfile(){
+    return myFetch(api_root + `/users/${playerId}`);
 }
 
 
