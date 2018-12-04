@@ -11,7 +11,7 @@ Track and Weight diet (home screen → diet/weight tracking screen)
  - The user can input exactly what they're eating into a note so he/she can reference it in the future.
  - The user can update his/her weight at anytime. In addition, BMI will be tracked based on height and current weight.
 
-**Facebook login is successful but functionality is limited to to issues with playerId***
+**Facebook login is successful but functionality is limited to to issues with playerId**
 
 ## Project setup
 ```
