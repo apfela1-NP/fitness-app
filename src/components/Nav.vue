@@ -5,16 +5,13 @@
                 <router-link class="nav-link" exact-active-class="active" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" exact-active-class="active" to="/about">About</router-link>
-            </li>
-            <li class="nav-item">
                 <router-link class="nav-link" exact-active-class="active" v-if="playerId !== null" :to="{name: 'user', params: {id: playerId}}">Profile</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" exact-active-class="active" to="/exercise">Exercise</router-link>
+                <router-link class="nav-link" exact-active-class="active" v-if="playerId !== null" :to="{name: 'exercise', params: {id: playerId}}">Exercise</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" exact-active-class="active" to="/diet">Diet</router-link>
+                <router-link class="nav-link" exact-active-class="active" v-if="playerId !== null" :to="{name: 'diet', params: {id: playerId}}">Diet</router-link>
             </li>
         </ul>
     </nav>

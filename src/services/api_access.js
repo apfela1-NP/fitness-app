@@ -19,17 +19,50 @@ export function Login(name, fbid, access_token){
             });
 }
 
-export function enterMeal(food){
+export function EnterMeal(food){
     return myFetch(api_root + `/diet`, {food})
 }
 
-export function enterExercise(exercise, duration){
+export function EnterExercise(exercise, duration){
     return myFetch(api_root + `/exercise`, {exercise, duration})
+}
+
+export function EnterWeight(id){
+    return myFetch(api_root + `/sharedwith`, {id})
+}
+
+export function AllowAccess(weight){
+    return myFetch(api_root + `/weight`, {weight})
 }
 
 export function GetMyProfile(){
     return myFetch(api_root + `/users/${playerId}`);
 }
+
+export function GetTotalUsers(){
+    return myFetch(api_root + `/totalusers`)
+}
+
+export function GetExercise(){
+    return myFetch(api_root + `/users/${playerId}/exercise`)
+}
+
+export function GetDiet(){
+    return myFetch(api_root + `/users/${playerId}/diet`)
+}
+
+export function GetWeight(){
+    return myFetch(api_root + `/users/${playerId}/weight`)
+}
+
+export function GetBMI(){
+    return myFetch(api_root + `/users/${playerId}/bmi`)
+}
+
+export function GetSharedWith(){
+    return myFetch(api_root + `/users/${playerId}/sharedwith`)
+}
+
 
 
   function myFetch(url = ``, data = null) {

@@ -1,16 +1,31 @@
 <template>
+<div class="el">
 <div class="diet">
 <form>
     <h3>Add new Meal!</h3>
   <div class="form-group">
-    <label for="diet">Exercise</label>
+    <label for="diet">Diet</label>
     <input type="text" class="form-control" id="enterdiet" placeholder="Enter food">
     <small class="form-text text-muted">Enter the food you ate.</small>
   </div>
-  <button type="submit" class="btn btn-primary" @click.prevent="entermeal">Add food</button>
+  <button type="submit" class="btn btn-primary" @click="entermeal">Add food</button>
 </form>
 </div>
+<div>
+<form>
+    <h3>Add new weight!</h3>
+  <div class="form-group">
+    <label for="weight">Weight</label>
+    <input type="text" class="form-control" id="enterweight" placeholder="Enter weight">
+    <small class="form-text text-muted">Enter your most recent weight.</small>
+  </div>
+  <button type="submit" class="btn btn-primary" @click="enterweight">Add weight</button>
+</form>
+</div>
+</div>
 </template>
+
+
 
 <script>
 import * as api from '@/services/api_access';
@@ -33,7 +48,7 @@ export default {
     },
     created() {
         loopTimer = setInterval(this.refresh, 1000);
-        api.events.$on("playerId", x=> this.playerId = x)
+        api.events.$on("playerId", x=> this.playerId = x);
         
     },
     methods: {
@@ -46,7 +61,10 @@ export default {
             //.then(()=> this.refresh())
         },
         entermeal(f) {
-            api.enterMeal(f);
+            api.EnterMeal(f);
+        },
+        enterweight(w) {
+            api.EnterWeight(w);
         }
 
     },

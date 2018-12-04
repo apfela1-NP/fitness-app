@@ -12,7 +12,7 @@
     <input type="text" class="form-control" id="enterduration" placeholder="Enter duration">
     <small class="form-text text-muted">Enter how long you exercised for.</small>
   </div>
-  <button type="submit" class="btn btn-primary" @click.prevent="enterexercise">Add exercise</button>
+  <button type="submit" class="btn btn-primary" @click="enterexercise">Add exercise</button>
 </form>
 </div>
 </template>
@@ -30,6 +30,7 @@ export default {
             profileString: "",
             sharedwith: [],
             diet: [],
+            exercise: [],
             state: {
                 users: [],
             },
@@ -51,7 +52,7 @@ export default {
             //.then(()=> this.refresh())
         },
         enterexercise(e, d) {
-            api.enterExercise(e, d);
+            api.EnterExercise(e, d);
         }
 
     },
