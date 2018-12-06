@@ -1,7 +1,7 @@
 <template>
 <div class="profile">
     <div class="yes" v-if="playerId !== null">
-        <p>{{}}</p>
+        <p>okay</p>
     </div>
     <div class="no" v-if="playerId === null">
         <p>help</p>
