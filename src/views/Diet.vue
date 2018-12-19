@@ -1,5 +1,6 @@
 <template>
-<div class="el">
+<div class="body">
+<div class="container-fluid">
 <div class="diet">
 <form>
     <h3>Add new Meal!</h3>
@@ -23,9 +24,18 @@
 </form>
 </div>
 </div>
+</div>
 </template>
 
-
+<style lang="scss">
+.container-fluid {
+    background-color: rgb(206, 229, 238);
+}
+h3 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: normal;
+}
+</style>
 
 <script>
 import * as api from '@/services/api_access';

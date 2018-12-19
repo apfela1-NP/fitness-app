@@ -1,10 +1,10 @@
 <template>
 <div class="profile">
     <div class="yes" v-if="playerId !== null">
-        <p>okay</p>
+        <p>playerId!==null</p>
     </div>
     <div class="no" v-if="playerId === null">
-        <p>help</p>
+        <p>playerId===null</p>
     </div>
 </div>
 
@@ -37,7 +37,6 @@ export default {
         loopTimer = setInterval(this.refresh, 1000);
         api.events.$on("playerId", x=> this.playerId = x)
         .then(api.GetMyProfile())
-        .then(x=> this.profileString = x)
     },
     methods: {
         refresh(){
